@@ -1,0 +1,29 @@
+//// The Maven plugin adds support for deploying artifacts to Maven repositories.
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+
+    repositories {
+        maven {
+            name('codethink-maven')
+
+            allowInsecureProtocol = true
+
+            credentials {
+                username('Chuanwise')
+                password('lclbm66666')
+            }
+
+            def snapshotRepository = 'http://121.4.253.187:8081/repository/maven-snapshots/'
+            def releaseRepository = 'http://121.4.253.187:8081/repository/maven-releases/'
+            def isReleaseBuild = !project.version.toString().endsWith('SNAPSHOT')
+
+            url(isReleaseBuild ? releaseRepository : snapshotRepository)
+        }
+    }
+}

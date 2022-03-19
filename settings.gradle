@@ -1,0 +1,6 @@
+rootProject.name = 'xiaoming-platform'
+include 'xiaoming-platform-common'
+include 'xiaoming-platform-launcher'
+include 'xiaoming-platform-module-debug'
+include 'xiaoming-platform-module-jline'
+

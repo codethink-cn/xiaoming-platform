@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+    id "java-library"
+}
+
+dependencies {
+    // jansi
+    api 'org.fusesource.jansi:jansi:2.4.0'
+
+    // xiaoming api
+    api 'cn.codethink:xiaoming-api:5.0-SNAPSHOT'
+
+    // yaml
+    api 'org.yaml:snakeyaml:1.30'
+
+    // command lib
+    api 'cn.chuanwise:command-lib:2.5-SNAPSHOT'
+}
