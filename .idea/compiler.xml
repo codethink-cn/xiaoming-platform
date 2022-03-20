@@ -14,8 +14,6 @@
         <module name="xiaoming-platform.xiaoming-platform-launcher.test" />
         <module name="xiaoming-platform.xiaoming-platform-module-debug.test" />
         <module name="xiaoming-platform.xiaoming-platform-module-jline.main" />
-        <module name="xiaoming-platform.test" />
-        <module name="xiaoming-platform.main" />
         <module name="xiaoming-platform.xiaoming-platform-module-jline.test" />
       </profile>
     </annotationProcessing>

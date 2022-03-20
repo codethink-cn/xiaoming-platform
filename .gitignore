@@ -115,7 +115,7 @@ gradle-app.setting
 
 ### xiaoming platform related
 
-/publish-script.gradle
+/publish.gradle
 
 ## testing file
 /configurations/

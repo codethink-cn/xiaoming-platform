@@ -6,10 +6,10 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 // scripts in root project directory
-def mirrorScriptFile = new File('use-mirror.gradle')
-def publishScriptFile = new File('publish-script.gradle')
+def mirrorScriptFile = new File('mirrors.gradle')
+def publishScriptFile = new File('publish.gradle')
 
-allprojects {
+subprojects {
     apply plugin: 'java-library'
     apply plugin: 'java'
 
