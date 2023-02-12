@@ -1,6 +1,6 @@
 package cn.codethink.xiaoming.platform.event;
 
-import cn.codethink.xiaoming.platform.subject.Subject;
+import cn.codethink.xiaoming.platform.registration.Subject;
 
 /**
  * <h1>事件环境</h1>

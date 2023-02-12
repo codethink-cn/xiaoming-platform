@@ -1,6 +1,6 @@
 package cn.codethink.xiaoming.platform.annotation;
 
-import cn.codethink.xiaoming.platform.subject.Subject;
+import cn.codethink.xiaoming.platform.registration.Subject;
 
 import java.lang.annotation.*;
 
