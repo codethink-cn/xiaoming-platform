@@ -8,13 +8,13 @@ package cn.codethink.xiaoming.platform.event;
  * @author Chuanwise
  */
 @FunctionalInterface
-public interface Listener<T> {
+public interface Listener {
     
     /**
      * 监听事件
      *
-     * @param t 事件
+     * @param object 事件
      * @throws Exception 监听时抛出的异常
      */
-    void listen(T t) throws Exception;
+    void listen(Object object) throws Exception;
 }

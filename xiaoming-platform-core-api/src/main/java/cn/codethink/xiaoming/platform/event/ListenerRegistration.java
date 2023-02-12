@@ -1,6 +1,5 @@
 package cn.codethink.xiaoming.platform.event;
 
-import cn.codethink.xiaoming.platform.object.PlatformObject;
 import cn.codethink.xiaoming.platform.registration.Registration;
 
 /**
@@ -23,5 +22,5 @@ public interface ListenerRegistration
      *
      * @return 监听器
      */
-    Listener<?> getListener();
+    Listener getListener();
 }

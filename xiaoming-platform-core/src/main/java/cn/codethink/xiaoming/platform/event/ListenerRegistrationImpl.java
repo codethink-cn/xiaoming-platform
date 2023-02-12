@@ -1,7 +1,6 @@
 package cn.codethink.xiaoming.platform.event;
 
 import cn.codethink.xiaoming.platform.Platform;
-import cn.codethink.xiaoming.platform.object.AbstractPlatformObject;
 import cn.codethink.xiaoming.platform.registration.AbstractSubjectObject;
 
 public class ListenerRegistrationImpl
@@ -20,7 +19,7 @@ public class ListenerRegistrationImpl
     }
     
     @Override
-    public Listener<?> getListener() {
+    public Listener getListener() {
         return null;
     }
 }
