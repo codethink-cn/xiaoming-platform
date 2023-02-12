@@ -1,5 +1,6 @@
 package cn.codethink.xiaoming.platform.annotation;
 
+import cn.codethink.xiaoming.platform.event.Priority;
 import cn.codethink.xiaoming.platform.registration.Subject;
 
 import java.lang.annotation.*;
@@ -15,4 +16,18 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Listener {
+    
+    /**
+     * 监听器优先级
+     *
+     * @return 监听器优先级
+     */
+    Priority priority() default Priority.DEFAULT;
+    
+    /**
+     * 监听的事件类型
+     *
+     * @return 监听的事件类型
+     */
+    Class<?>[] classes() default {};
 }
