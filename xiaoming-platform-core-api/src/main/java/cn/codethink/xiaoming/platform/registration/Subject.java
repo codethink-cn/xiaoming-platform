@@ -1,4 +1,4 @@
-package cn.codethink.xiaoming.platform.subject;
+package cn.codethink.xiaoming.platform.registration;
 
 import cn.codethink.xiaoming.platform.object.PlatformObject;
 import cn.codethink.xiaoming.platform.Platform;
