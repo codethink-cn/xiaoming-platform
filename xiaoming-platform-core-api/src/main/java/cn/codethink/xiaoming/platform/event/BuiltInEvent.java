@@ -9,6 +9,6 @@ import cn.codethink.xiaoming.platform.object.PlatformObject;
  *
  * @author Chuanwise
  */
-public interface BuildInEvent
+public interface BuiltInEvent
     extends PlatformObject {
 }
