@@ -1,2 +1,4 @@
 rootProject.name = 'xiaoming-platform'
+include 'xiaoming-platform-api'
+include 'xiaoming-platform-core'
 
