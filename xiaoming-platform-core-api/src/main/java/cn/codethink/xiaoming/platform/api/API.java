@@ -1,5 +1,8 @@
 package cn.codethink.xiaoming.platform.api;
 
+import cn.codethink.xiaoming.platform.event.Listener;
+import cn.codethink.xiaoming.platform.task.action.Action;
+
 /**
  * <h1>小明平台 API</h1>
  *
@@ -8,4 +11,8 @@ package cn.codethink.xiaoming.platform.api;
  * @author Chuanwise
  */
 public interface API {
+    
+    Listener.Builder<?> getListenerBuilder();
+    
+    Action getEmptyAction();
 }
