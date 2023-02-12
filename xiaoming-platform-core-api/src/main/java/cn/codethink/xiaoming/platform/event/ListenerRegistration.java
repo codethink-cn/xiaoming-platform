@@ -15,7 +15,7 @@ public interface ListenerRegistration
      *
      * @return 优先级
      */
-    int getPriority();
+    Priority getPriority();
     
     /**
      * 监听器
