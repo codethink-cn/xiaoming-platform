@@ -2,8 +2,10 @@ plugins {
     id 'java'
 }
 
-group 'cn.codethink'
-version '1.0-SNAPSHOT'
+allprojects {
+    group 'cn.codethink'
+    version '0.0.1-SNAPSHOT'
+}
 
 repositories {
     mavenCentral()
