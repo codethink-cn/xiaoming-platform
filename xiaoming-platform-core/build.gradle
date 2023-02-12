@@ -7,6 +7,7 @@ group 'cn.codethink'
 version '1.0-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -15,6 +16,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     api project(':xiaoming-platform-core-api')
+
+    implementation 'cn.codethink:codethink-common:1.0-SNAPSHOT'
 }
 
 test {
