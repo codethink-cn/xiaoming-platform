@@ -9,4 +9,11 @@ package cn.codethink.xiaoming.platform.registration;
  */
 public interface Registration
     extends SubjectObject {
+    
+    /**
+     * 获取注册签名
+     *
+     * @return 注册签名
+     */
+    String getSignature();
 }

@@ -8,12 +8,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantLock;
 
-public class ListenerRegistrationGraphImpl
-    implements ListenerRegistrationGraph {
+public class ListenerGraphImpl
+    implements ListenerGraph {
     
     private final Map<Class<?>, NodeImpl> nodes = new ConcurrentHashMap<>();
     
@@ -25,11 +22,11 @@ public class ListenerRegistrationGraphImpl
     }
     
     @Override
-    public Node getOrDefault(Class<?> eventClass, Node defaultNode) {
+    public Node getOrDefault(Class<?> eventClass, Node defaultValue) {
         Preconditions.objectNonNull(eventClass, "Event class");
     
         final Node node = nodes.get(eventClass);
-        return node == null ? defaultNode : node;
+        return node == null ? defaultValue : node;
     }
     
     @Override
@@ -61,28 +58,26 @@ public class ListenerRegistrationGraphImpl
      */
     private Node getOrPut(Class<?> eventClass) {
         NodeImpl node = nodes.get(eventClass);
+        if (node != null) {
+            return node;
+        }
     
-        // TODO
+        node = nodes.get(eventClass);
+    
         if (node == null) {
-            synchronized (nodes) {
-                node = nodes.get(eventClass);
-                
-                if (node == null) {
-                    node = new NodeImpl(this, eventClass);
-    
-                    for (NodeImpl existingNode : nodes.values()) {
-                        if (existingNode.eventClass.isAssignableFrom(eventClass)) {
-                            existingNode.outgoingNodes.put(eventClass, node);
-                            node.incomingNodes.put(existingNode.eventClass, existingNode);
-                        } else if (eventClass.isAssignableFrom(existingNode.eventClass)) {
-                            existingNode.incomingNodes.put(eventClass, node);
-                            node.outgoingNodes.put(existingNode.eventClass, existingNode);
-                        }
-                    }
-    
-                    nodes.put(eventClass, node);
+            node = new NodeImpl(this, eventClass);
+        
+            for (NodeImpl existingNode : nodes.values()) {
+                if (existingNode.eventClass.isAssignableFrom(eventClass)) {
+                    existingNode.outgoingNodes.put(eventClass, node);
+                    node.incomingNodes.put(existingNode.eventClass, existingNode);
+                } else if (eventClass.isAssignableFrom(existingNode.eventClass)) {
+                    existingNode.incomingNodes.put(eventClass, node);
+                    node.outgoingNodes.put(existingNode.eventClass, existingNode);
                 }
             }
+        
+            nodes.put(eventClass, node);
         }
         
         return node;
@@ -129,9 +124,9 @@ public class ListenerRegistrationGraphImpl
         private final Class<?> eventClass;
         private final Map<Class<?>, NodeImpl> incomingNodes = new ConcurrentHashMap<>();
         private final Map<Class<?>, NodeImpl> outgoingNodes = new ConcurrentHashMap<>();
-        private final ListenerRegistrationGraph graph;
+        private final ListenerGraph graph;
     
-        private NodeImpl(ListenerRegistrationGraph graph, Class<?> eventClass) {
+        private NodeImpl(ListenerGraph graph, Class<?> eventClass) {
             Preconditions.objectNonNull(graph, "Graph");
             Preconditions.objectNonNull(eventClass, "Event class");
             
@@ -145,7 +140,7 @@ public class ListenerRegistrationGraphImpl
         }
     
         @Override
-        public ListenerRegistrationGraph getGraph() {
+        public ListenerGraph getGraph() {
             return graph;
         }
     

@@ -1,14 +1,13 @@
 package cn.codethink.xiaoming.platform.event;
 
 import java.util.Set;
-import java.util.concurrent.locks.ReadWriteLock;
 
 /**
  * <h1>监听器注册图</h1>
  *
  * @author Chuanwise
  */
-public interface ListenerRegistrationGraph {
+public interface ListenerGraph {
     
     interface Node {
     
@@ -17,7 +16,7 @@ public interface ListenerRegistrationGraph {
          *
          * @return 图
          */
-        ListenerRegistrationGraph getGraph();
+        ListenerGraph getGraph();
     
         /**
          * 获取事件类型
@@ -45,7 +44,7 @@ public interface ListenerRegistrationGraph {
     
     Node getOrFail(Class<?> eventClass);
     
-    Node getOrDefault(Class<?> eventClass, Node defaultNode);
+    Node getOrDefault(Class<?> eventClass, Node defaultValue);
     
     Node remove(Class<?> eventClass);
 }
