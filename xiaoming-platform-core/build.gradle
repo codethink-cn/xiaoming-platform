@@ -3,6 +3,10 @@ plugins {
     id 'java-library'
 }
 
+def compileVersion = '8'
+compileJava.sourceCompatibility compileVersion
+compileJava.targetCompatibility compileVersion
+
 repositories {
     mavenLocal()
     mavenCentral()
