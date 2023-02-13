@@ -22,7 +22,7 @@ public @interface Listener {
      *
      * @return 监听器优先级
      */
-    Priority priority() default Priority.DEFAULT;
+    Priority priority() default Priority.NORMAL;
     
     /**
      * 监听的事件类型
