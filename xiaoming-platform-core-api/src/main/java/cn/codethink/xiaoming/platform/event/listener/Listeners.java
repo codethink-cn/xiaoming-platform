@@ -3,7 +3,7 @@ package cn.codethink.xiaoming.platform.event.listener;
 import cn.codethink.xiaoming.platform.api.APIFactory;
 import cn.codethink.xiaoming.platform.registration.Subject;
 import cn.codethink.xiaoming.platform.registration.SubjectObject;
-import cn.codethink.xiaoming.platform.registration.provider.Provider;
+import cn.codethink.xiaoming.platform.registration.Methods;
 
 import java.util.Set;
 
@@ -38,7 +38,7 @@ public interface Listeners
              * @param listeners 监听类
              * @return 监听器组构建器
              */
-            Builder listeners(Object... listeners);
+            Completed listeners(Object... listeners);
     
             /**
              * 添加监听类
@@ -46,15 +46,15 @@ public interface Listeners
              * @param listener 监听类
              * @return 监听器组构建器
              */
-            Builder listener(Object listener);
+            Completed listener(Object listener);
     
             /**
-             * 添加提供器
+             * 添加方法集
              *
-             * @param provider 提供器
+             * @param methods 方法集
              * @return 监听器组构建器
              */
-            Builder includes(Provider provider);
+            Completed methods(Methods methods);
     
             /**
              * 构建一个监听器组
@@ -63,6 +63,10 @@ public interface Listeners
              */
             Listeners build();
         }
+    }
+    
+    static Listeners of(Object listeners, Subject subject) {
+        return builder().subject(subject).listener(listeners).build();
     }
     
     static Builder builder() {

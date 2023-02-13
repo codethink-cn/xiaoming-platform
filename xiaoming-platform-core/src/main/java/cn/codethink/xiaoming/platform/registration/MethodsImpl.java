@@ -1,14 +1,13 @@
-package cn.codethink.xiaoming.platform.registration.provider;
+package cn.codethink.xiaoming.platform.registration;
 
 import cn.codethink.common.util.Preconditions;
 
-import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ProviderImpl
-    implements Provider {
+public class MethodsImpl
+    implements Methods {
     
     private final boolean recursive;
     private final boolean accessible;
@@ -40,18 +39,18 @@ public class ProviderImpl
         }
     
         @Override
-        public Provider build() {
-            return new ProviderImpl(recursive, accessible, modifiers);
+        public Methods build() {
+            return new MethodsImpl(recursive, accessible, modifiers);
         }
     }
     
-    private static final ProviderImpl INSTANCE = new ProviderImpl(false, false, 0x00000000);
+    private static final MethodsImpl INSTANCE = new MethodsImpl(false, false, 0x00000000);
     
-    public static ProviderImpl getInstance() {
+    public static MethodsImpl getInstance() {
         return INSTANCE;
     }
     
-    public ProviderImpl(boolean recursive, boolean accessible, int modifiers) {
+    public MethodsImpl(boolean recursive, boolean accessible, int modifiers) {
         this.recursive = recursive;
         this.accessible = accessible;
         this.modifiers = modifiers;
