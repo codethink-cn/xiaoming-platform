@@ -70,31 +70,32 @@ public class Graph<K, V extends ClassRegistration<K>> {
                         locks.add(outgoingNode.lock.writeLock());
                     }
                     
-                    boolean locked = false;
-                    
-                    // 若获取失败则自旋，自旋最大时长为 TODO: read config
-                    long bound = 0;
-                    while (System.currentTimeMillis() < bound) {
-                        locked = Locks.tryLockAll(locks);
-                        if (locked) {
-                            break;
+                    // 若获取失败则自旋
+                    // 若仍未获取锁，则获取整张表的重型锁
+                    final boolean acquiredNodesLock = Locks.tryLockAllOrSpinning(locks);
+                    if (!acquiredNodesLock) {
+                        lock.writeLock().lock();
+                    }
+    
+                    try {
+                        // 修改节点
+                        for (Node incomingNode : incomingNodes) {
+                            incomingNode.outgoingNodes.put(registeredClass, node);
+                            node.incomingNodes.put(incomingNode.registeredClass, incomingNode);
+                        }
+                        for (Node outgoingNode : outgoingNodes) {
+                            outgoingNode.incomingNodes.put(registeredClass, node);
+                            node.outgoingNodes.put(outgoingNode.registeredClass, outgoingNode);
+                        }
+    
+                        nodes.put(registeredClass, node);
+                    } finally {
+                        if (acquiredNodesLock) {
+                            Locks.unlockAll(locks);
+                        } else {
+                            lock.writeLock().unlock();
                         }
                     }
-                    
-                    // 若仍未获取锁，则获取整张表的重型锁
-                    locked = lock.writeLock().tryLock();
-    
-                    // 修改节点
-                    for (Node incomingNode : incomingNodes) {
-                        incomingNode.outgoingNodes.put(registeredClass, node);
-                        node.incomingNodes.put(incomingNode.registeredClass, incomingNode);
-                    }
-                    for (Node outgoingNode : outgoingNodes) {
-                        outgoingNode.incomingNodes.put(registeredClass, node);
-                        node.outgoingNodes.put(outgoingNode.registeredClass, outgoingNode);
-                    }
-    
-                    nodes.put(registeredClass, node);
                 }
             }
         }
