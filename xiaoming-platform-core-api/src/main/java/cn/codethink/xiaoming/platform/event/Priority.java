@@ -32,7 +32,7 @@ public enum Priority {
     /**
      * 默认优先级
      */
-    DEFAULT,
+    NORMAL,
     
     /**
      * 在其他插件响应该事件之后应该进行的动作的优先级
