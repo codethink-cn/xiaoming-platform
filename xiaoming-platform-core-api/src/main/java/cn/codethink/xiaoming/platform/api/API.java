@@ -1,6 +1,9 @@
 package cn.codethink.xiaoming.platform.api;
 
-import cn.codethink.xiaoming.platform.event.Listener;
+import cn.codethink.xiaoming.platform.event.listener.Listener;
+import cn.codethink.xiaoming.platform.event.listener.Listeners;
+import cn.codethink.xiaoming.platform.registration.provider.Provider;
+import cn.codethink.xiaoming.platform.registration.rule.BeforeAndAfterRule;
 import cn.codethink.xiaoming.platform.task.action.Action;
 
 /**
@@ -14,5 +17,13 @@ public interface API {
     
     Listener.Builder<?> getListenerBuilder();
     
+    Listeners.Builder getListenersBuilder();
+    
     Action getEmptyAction();
+    
+    BeforeAndAfterRule getBeforeAndAfterRule(String beforeOneName, String afterOneName);
+    
+    Provider getDefaultProvider();
+    
+    Provider.Builder getProviderBuilder();
 }
