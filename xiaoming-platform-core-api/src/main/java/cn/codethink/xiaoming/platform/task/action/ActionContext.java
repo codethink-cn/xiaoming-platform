@@ -1,7 +1,6 @@
 package cn.codethink.xiaoming.platform.task.action;
 
 import cn.codethink.xiaoming.platform.registration.SubjectObject;
-import cn.codethink.xiaoming.platform.task.Task;
 
 /**
  * <h1>行动环境</h1>
@@ -19,11 +18,4 @@ public interface ActionContext
      * @return 行动
      */
     Action getAction();
-    
-    /**
-     * 获取对应的任务
-     *
-     * @return 对应的任务
-     */
-    Task getTask();
 }
