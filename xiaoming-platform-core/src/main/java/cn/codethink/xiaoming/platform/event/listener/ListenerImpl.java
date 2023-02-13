@@ -1,4 +1,4 @@
-package cn.codethink.xiaoming.platform.event;
+package cn.codethink.xiaoming.platform.event.listener;
 
 import cn.codethink.common.util.Arrays;
 import cn.codethink.common.util.Preconditions;
@@ -6,11 +6,12 @@ import cn.codethink.xiaoming.platform.Platform;
 import cn.codethink.xiaoming.platform.common.ExceptionBiConsumer;
 import cn.codethink.xiaoming.platform.common.ExceptionConsumer;
 import cn.codethink.xiaoming.platform.common.ExceptionRunnable;
+import cn.codethink.xiaoming.platform.event.EventContext;
+import cn.codethink.xiaoming.platform.event.Priority;
+import cn.codethink.xiaoming.platform.event.listener.Listener;
 import cn.codethink.xiaoming.platform.registration.AbstractSubjectObject;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class ListenerImpl
@@ -20,7 +21,7 @@ public class ListenerImpl
     public static class BuilderImpl<T>
         implements Builder<T> {
         
-        private Priority priority = Priority.DEFAULT;
+        private Priority priority = Priority.NORMAL;
         private Set<Class<?>> eventClasses = Collections.singleton(Object.class);
     
         @Override
@@ -112,7 +113,7 @@ public class ListenerImpl
     }
     
     @Override
-    public String getSignature() {
+    public String getName() {
         return signature;
     }
 }
