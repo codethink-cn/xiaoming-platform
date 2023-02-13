@@ -32,16 +32,20 @@ public class Locks {
      */
     public static boolean tryLockAllOrSpinning(List<Lock> locks, int maxSpinningCount) {
         Preconditions.objectNonNull(locks, "Locks");
-        Preconditions.argument(maxSpinningCount > 0, "Max spinning count");
+        Preconditions.argument(maxSpinningCount >= 0, "Max spinning count should be greater or equals than 0!");
     
+        if (tryLockAll(locks)) {
+            return true;
+        }
+        
         int spinningCount = 0;
-        do {
+        while (spinningCount <= maxSpinningCount) {
             if (tryLockAll(locks)) {
                 break;
             } else {
                 spinningCount++;
             }
-        } while (spinningCount < maxSpinningCount);
+        }
         return spinningCount != maxSpinningCount;
         
     }
