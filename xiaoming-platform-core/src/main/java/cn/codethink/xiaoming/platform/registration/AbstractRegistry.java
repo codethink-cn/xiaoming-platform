@@ -1,7 +1,6 @@
 package cn.codethink.xiaoming.platform.registration;
 
 import cn.codethink.common.util.Arrays;
-import cn.codethink.common.util.Preconditions;
 import cn.codethink.xiaoming.platform.event.Event;
 import cn.codethink.xiaoming.platform.service.Service;
 
@@ -70,7 +69,7 @@ public abstract class AbstractRegistry<V extends Registration> {
     /**
      * 以注册名索引的记录
      */
-    protected final Map<String, Record<?, V>> nameIndexedRecords = new HashMap<>();
+    protected final Map<String, Record<?, V>> signatureIndexedRecords = new HashMap<>();
     
     /**
      * 以类型索引的记录
@@ -108,7 +107,7 @@ public abstract class AbstractRegistry<V extends Registration> {
     
             for (int i = 0; i < size; i++) {
                 final ClassValuePair<K, V> pair = pairs.get(i);
-                record = (Record<K, V>) nameIndexedRecords.get(pair.value.getName());
+                record = (Record<K, V>) signatureIndexedRecords.get(pair.value.getSignature());
                 if (record != null) {
                     record.value = pair.value;
                     results[i] = record;
@@ -129,7 +128,7 @@ public abstract class AbstractRegistry<V extends Registration> {
                 final ClassValuePair<K, V> pair = pairs.get(i);
                 final Class<K> registeredClass = pair.registeredClass;
                 final V value = pair.value;
-                final String name = pair.value.getName();
+                final String signature = pair.value.getSignature();
     
                 // 获取同类型已有的监听器
                 ClassGraphNode<K, V> classGraphNode = (ClassGraphNode<K, V>) classIndexedNodes.get(registeredClass);
@@ -152,7 +151,7 @@ public abstract class AbstractRegistry<V extends Registration> {
                 // 创建依赖关系节点
                 final SortGraphNode<K, V> sortGraphNode = new SortGraphNode<>(registeredClass, value);
                 record = new Record<>(registeredClass, value, classGraphNode, sortGraphNode);
-                nameIndexedRecords.put(name, record);
+                signatureIndexedRecords.put(signature, record);
     
                 // 将记录添加进依赖关系表并调整依赖关系
                 addAndAdjust(record);

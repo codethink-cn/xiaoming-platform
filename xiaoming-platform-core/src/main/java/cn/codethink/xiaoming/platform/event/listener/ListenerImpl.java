@@ -113,7 +113,7 @@ public class ListenerImpl
     }
     
     @Override
-    public String getName() {
+    public String getSignature() {
         return signature;
     }
 }
